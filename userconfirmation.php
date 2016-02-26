@@ -23,7 +23,7 @@ session_start();
 </head>
 <body>
 	<div id="home_page" align="center">
-	<h1 id="uc_h1">OwlEats</h1>	
+	<h1 id="uc_h1">Movie Bets</h1>	
 		
 	<p id="uc_p">Sign Up Confirmed!</p>
 	<br>
