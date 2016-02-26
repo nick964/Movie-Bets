@@ -1,0 +1,59 @@
+.moviepics {
+	 height: auto; 
+    width: auto; 
+    max-width: 300px; 
+    max-height: 300px;
+    float: right;
+}
+
+.placebet {
+	
+}
+
+.mainimg {
+  max-height: 500px;
+  
+}
+
+#whichid {
+	display: none;
+}
+
+.maintable {  
+  display: block;  
+  margin-right: auto;  
+  margin-left: auto;  
+}  
+
+.accounttable {  
+  display: block;  
+  margin-right: auto;  
+  margin-left: auto;  
+}  
+
+.accounttable th {
+  padding: 20px;
+}
+
+.accounttable td {
+  padding: 20px;
+}
+
+.moviedescrip {
+	text-align: center;
+}
+
+tr.spaceUnder > td
+{
+  padding-bottom: 2em;
+}
+
+.wrapper {
+  text-align: center;
+}
+
+/**CSS for login and register page **/
+
+body {
+    padding-top: 70px;
+}
