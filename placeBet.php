@@ -1,12 +1,13 @@
 <?php
-
 session_start();
 require_once('resources/constants.inc.php');
 include('functions/processBet.php');
+include('functions/functions.php');
 
 
         if(!(isset($_SESSION['userid']))) {
            header("Location: owleats_home.php");
+           die();
         } else {
             $userid = $_SESSION['userid'];
         }
@@ -27,6 +28,7 @@ include('functions/processBet.php');
        switch ($result) {
     case 1:
         header('Location: mybets.php');
+        die();
         break;
       case 2:
         $errmsg = "Not enough money in the account to make the bet.";
