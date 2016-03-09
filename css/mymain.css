@@ -57,3 +57,135 @@ tr.spaceUnder > td
 body {
     padding-top: 70px;
 }
+
+.navbar {
+  background: black;
+
+}
+
+
+/**CSS from txtbkr **/
+
+#logo {
+  margin-left: 20%;
+  text-align: left;
+  font-size: 100%;
+  color: white;
+}
+
+#firstname, #lastname, #email, #major, #password, #confirm {
+  height: 30px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+#welcome {
+  font-size: 250%;
+  margin-bottom: 30px;
+}
+
+.fancyButton {
+  background: black;
+  position: relative;
+  color: white;
+  border-color: black;
+}
+
+.fancyButton:hover {
+  color: black;
+  border-color: black;
+  background: white;
+}
+
+.fancyButton:focus,.fancyButton:active{
+  position: relative !important;
+  color: black !important;
+  background: white !important;
+  border-color: black !important;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+.navbar-right{
+  margin-right: 0.5%;
+}
+
+textarea:focus, input:focus, input[type]:focus, .uneditable-input:focus, button:focus {   
+    border-color: rgba(0, 0, 0, 0.0);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.6);
+    outline: 0 none;
+}
+
+/* SEARCH BAR BEGIN /*
+
+#imaginary_container{
+    margin-top:20%; /* Don't copy this */
+}
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+  border-right:0; 
+  box-shadow:0 0 0; 
+  border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.smallsearch{
+  height: 30px;
+}
+
+.mainsearch{
+  height: 46px;
+}
+
+.searchimage{
+  vertical-align: 0;
+}
+/* SEARCH BAR END */
+
+/* BOOK DISPLAY BEGIN */
+
+.bookdisplay {
+  width: 10em;
+}
+
+.bookrow {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+tr.spaceUnder > td {
+  padding-bottom: 2em;
+}
+
+
+/* BEGIN ADD BOOK */
+
+label {
+  padding-left: 1%;
+}
+
+.textEdit {
+  padding-left: 20%;
+  padding-right: 20%;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.checkbox label, .radio label {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* END ADD BOOK */
+
+.vis {
+  display: none;
+}
+
+.see {
+  display: inline;
+}

@@ -154,7 +154,66 @@ catch (Exception $e)
 	}
 
 		$con = null;
-		echo $msg;
+		//echo $msg;
+		return true;
+		
+} 
+
+/****************************************************
+Name: Process Win
+Purpose: This function will update a users balance after a win.
+
+date		developer		comment
+20130912	Nick Robinson	none so far
+*****************************************************/
+
+function processWin($userid, $betamt) {
+
+
+$errortext = "";
+//run sql to get the current balance, given the userid
+$currentBalance = getUserBalance($userid);
+
+if($currentBalance == "err") {
+	echo "error: getUserBalance isn't working..";
+	return false;
+}
+
+//calculate the winnings;
+$newamt = $currentBalance + ($betamt * 2);
+
+
+
+// Now that you have the new balance, update it in the backend
+try 
+	{
+
+		$con = new PDO("mysql:host=".CONST_HOST.";dbname=".CONST_DBNAME,CONST_USER,CONST_PASSWORD);
+		$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		//if a session is already started, then assign orderid to the session variable
+		$sql = "update users set balance = :newBalance where userid = :userid";
+		$results = $con->prepare($sql);
+		$results->bindParam(":userid", $userid);
+		$results->bindParam(":newBalance", $newamt);
+		$results->execute();
+
+		if ($results) {
+			$msg = "Your new balace is $newamt";
+		} else {
+			echo "Error, you balance could not be updated in the sql database";
+			return false;
+		}
+
+	}
+
+catch (Exception $e) 
+	{
+	$error = $e->getMessage();
+	echo $error;
+	}
+
+		$con = null;
+		//echo $msg;
 		return true;
 		
 } 
@@ -177,11 +236,39 @@ function confirmPassword($password, $confirm) {
 	return $result;
 }
 
+/****************************************************
+Name: Redirect
+Purpose: This function is just a cleaner way to redirect to a url
+
+date		developer		comment
+20150206	Nick Robinson	none so far
+*****************************************************/
+
 function redirect($url, $statusCode = 303)
 {
    header('Location: ' . $url, true, $statusCode);
    die();
 }
+
+/****************************************************
+Name: Curl Get Contents
+Purpose: This function will get contents from the OMDB APi
+
+date		developer		comment
+20150302	Nick Robinson	none so far
+*****************************************************/
+
+function curl_get_contents($url)
+	{
+	  $ch = curl_init($url);
+	  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	  curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	  curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+	  curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+	  $data = curl_exec($ch);
+	  curl_close($ch);
+	  return $data;
+	}
 
  
  ?>

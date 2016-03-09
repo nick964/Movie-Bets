@@ -123,6 +123,7 @@ while ($i < count($betrows)) {
       <ul class="nav navbar-nav">
         <li class="active"><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
         <li><a href="mybets.php">My Current Bets</a></li>
+        <li><a href="pendingbets.php">Pending Bets</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">

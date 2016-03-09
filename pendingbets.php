@@ -1,56 +1,34 @@
 <?php
-session_start();
 require_once('resources/constants.inc.php');
-include('functions/processBet.php');
-
-
-
+include('functions/movietables.php');
+session_start();
+//make sure that user is logged in for this page
         if(!(isset($_SESSION['userid']))) {
            header("Location: owleats_home.php");
-           die();
         } else {
             $userid = $_SESSION['userid'];
+            echo $userid;
         }
 
-        $movieid = $_GET['movieid'];
-        $ou = $_GET['ou'];
-        $betAmt = $_GET['betAmt'];
-       /**
-       ** This will cause the cannot modify header info..cant do that
-       
-       echo "Movieid is " . $movieid . "<br>";
-       echo "User ID is " . $userid . "<br>";
-       echo "over or under  is " . $ou . "<br>";
-       echo "Bet amount is " . $betAmt . "<br>";
-		*/
+try 
+    {
+    $con = new PDO("mysql:host=".CONST_HOST.";dbname=".CONST_DBNAME,CONST_USER,CONST_PASSWORD);
+    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sql = "select * from movies where active = 2;";
+    $totalresults = $con->prepare($sql);
+    $myarray = $totalresults->execute();
+    $rows = $totalresults->fetchAll();
 
-       $result = processBet($userid, $movieid, $betAmt, $ou);
+} 
+catch (Exception $e) 
+    {
+    $error = $e->getMessage();
+    echo $error;
+    }
 
-        $errmsg = "";
-       switch ($result) {
-    case 1:
-        header('Location: mybets.php');
-        die();
-        break;
-      case 2:
-        $errmsg = "Not enough money in the account to make the bet.";
-        break;
-    case 3:
-         $errmsg = "You already placed a bet on this movie.";
-        break;
-      default:
-        $errmsg = "This shouldnt of happened..";
-        break;
-        
-  }
-
-
-
-
+$con = null;
 
 ?>
-
-
 
 <!doctype html>
 <html class="no-js" lang="">
@@ -65,7 +43,7 @@ include('functions/processBet.php');
         <!-- Place favicon.ico in the root directory -->
 
         <!-- Bootstrap -->
-      <link href="css/bootstrap.min.css" rel="stylesheet">
+    	<link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
 
         <link rel="stylesheet" href="css/normalize.css">
@@ -98,8 +76,9 @@ include('functions/processBet.php');
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
+        <li><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
         <li><a href="mybets.php">My Current Bets</a></li>
+        <li class="active"><a href="pendingbets.php">Pending Bets</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
@@ -108,20 +87,30 @@ include('functions/processBet.php');
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-          <div class="row">
-            <div class="col-lg-12" id="title">
-              <h1>Error</h1>
-            </div>
-           </div>
+        	<div class="row">
+	      	  <div class="col-lg-12" id="title">
+		      	  <h1>Pending Bets</h1>
+	      	  </div>
+	      	 </div>
 
-   <div class="row">
-        
-                 <div class="col-md-12">  
-                 <center>      
-        <h2 style="text-align: center"> Error</h2><br>
-        <h2 style="text-align: center"> <?php echo $errmsg ?></h2>
-         <button type="button" onclick="window.location.href='homepage.php'" class="btn btn-primary">Go Back Home</button>
-         </center>
+        <table cellpadding="15" class="table-bordered maintable table-responsive">
+
+	      
+             <?php
+
+            $i = 0;
+            $total = 0;
+            while ($i < count($rows)) {
+                echo pendingbetstable($rows[$i]['link'], $rows[$i]['title'], $rows[$i]['line'], $rows[$i]['movieid'], $rows[$i]['release_date'], $rows[$i]['critic_score']);
+                
+                $i++;
+
+            }
+
+
+             ?>
+        </table>
+
 
 
 
@@ -131,7 +120,7 @@ include('functions/processBet.php');
         <script src="js/main.js"></script>
 
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="js/bootstrap.min.js"></script>
+  	  <script src="js/bootstrap.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

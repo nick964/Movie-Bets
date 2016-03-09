@@ -1,7 +1,6 @@
 function setOver(x) {
 	var movieid = x;
-	var ouInput = document.getElementById("ou" + x);
-	ouInput.value = "over";
+	document.getElementById("ou" + x).value = "over";
 	var overButton = document.getElementById("overbutton" + x);
 	var underButton = document.getElementById("underbutton" + x);
 	underButton.className = "btn btn-secondary";
@@ -12,8 +11,7 @@ function setOver(x) {
 
 function setUnder(x) {
 	var movieid = x;
-	var ouInput = document.getElementById("ou" + x);
-	ouInput.value = "over";
+	document.getElementById("ou" + x).value = "under";
 	var overButton = document.getElementById("overbutton" + x);
 	var underButton = document.getElementById("underbutton" + x);
 	overButton.className = "btn btn-secondary";
@@ -22,7 +20,7 @@ function setUnder(x) {
 
 function validateForm(x) {
 	var ouInput = document.getElementById("ou" + x);
-	if (ouInput.value == "") {
+	if (ouInput.value == "null") {
 		alert("You must click on the over or under button before submitting a bet!");
 		return false;
 	}

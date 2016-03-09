@@ -1,7 +1,6 @@
 <?php
 require_once('resources/constants.inc.php');
-include('movieloop.php');
-include('movielooptable.php');
+include('functions/movietables.php');
 session_start();
 //make sure that user is logged in for this page
         if(!(isset($_SESSION['userid']))) {
@@ -15,7 +14,7 @@ try
     {
     $con = new PDO("mysql:host=".CONST_HOST.";dbname=".CONST_DBNAME,CONST_USER,CONST_PASSWORD);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "select * from movies";
+    $sql = "select * from movies where active = 1;";
     $totalresults = $con->prepare($sql);
     $myarray = $totalresults->execute();
     $rows = $totalresults->fetchAll();
@@ -72,14 +71,15 @@ $con = null;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="homepage.php">Movie Bets</a>
+      <a class="navbar-brand active" href="homepage.php">Movie Bets</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
+        <li><a href="myaccount.php">My Account</a></li>
         <li><a href="mybets.php">My Current Bets</a></li>
+        <li><a href="pendingbets.php">Pending Bets</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
@@ -103,7 +103,7 @@ $con = null;
             $i = 0;
             $total = 0;
             while ($i < count($rows)) {
-                echo movielooptable($rows[$i]['link'], $rows[$i]['title'], $rows[$i]['line'], $rows[$i]['movieid']);
+                echo movielooptable($rows[$i]['link'], $rows[$i]['title'], $rows[$i]['line'], $rows[$i]['movieid'], $rows[$i]['release_date']);
                 
                 $i++;
 

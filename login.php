@@ -31,7 +31,7 @@ try
 	$rows = $results->fetch(PDO::FETCH_NUM);
 	if($rows > 0) {
 		
-		$_SESSION['userid'] = $rows[0][0];
+		$_SESSION['userid'] = $rows[0];
 		header("Location: homepage.php");
 		
 	}

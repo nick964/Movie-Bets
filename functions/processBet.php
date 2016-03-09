@@ -57,10 +57,10 @@ catch (Exception $e)
 
 				if($inserted) {
 					if(subtractBalance($userid, $betamt)) {
-					echo "bet has been inserted, and balance has been updated.";
+					//echo "bet has been inserted, and balance has been updated.";
 					return 1;
 				} else {
-					echo "bet has been inserted, but amount was not updated";
+					//echo "bet has been inserted, but amount was not updated";
 
 
 				}
