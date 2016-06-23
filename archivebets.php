@@ -14,13 +14,11 @@ try
     {
     $con = new PDO("mysql:host=".CONST_HOST.";dbname=".CONST_DBNAME,CONST_USER,CONST_PASSWORD);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "select * from movies where active = 1;";
+    $sql = "select * from movies where active = 3;";
     $totalresults = $con->prepare($sql);
     $myarray = $totalresults->execute();
     $rows = $totalresults->fetchAll();
-    if(!empty($rows)) {
-    $link = "\"". $rows[0][4] ."\"";
-    }
+
 } 
 catch (Exception $e) 
     {
@@ -47,12 +45,11 @@ $con = null;
         <!-- Bootstrap -->
     	<link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/mymain.css">
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <script src="js/myscript.js"></script>
     </head>
     <body>
@@ -62,7 +59,7 @@ $con = null;
 
 
         <!-- Add your site or application content here -->
-        <div class="container-fluid">
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,7 +70,7 @@ $con = null;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand active" href="homepage.php">Movie Bets</a>
+      <a class="navbar-brand" href="homepage.php">Movie Bets</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -82,7 +79,7 @@ $con = null;
         <li><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
         <li><a href="mybets.php">My Current Bets</a></li>
         <li><a href="pendingbets.php">Pending Bets</a></li>
-        <li ><a href="archivebets.php">Archived Bets</a></li>
+        <li class="active"><a href="archivebets.php">Archived Bets</a></li>
         <li><a href="leaderboards.php">Leaderboards</a></li>
       </ul>
      
@@ -92,19 +89,15 @@ $con = null;
     </div><!-- /.navbar-collapse -->
 
 </nav>
-
-
-
         	<div class="row">
 	      	  <div class="col-lg-12" id="title">
-		      	  <h1>Pick your movies</h1>
-		      	  <h2>Take ya bets</h2>
+		      	  <h1>Old Bets</h1>
 	      	  </div>
 	      	 </div>
-    <div class="col-lg-12" id="title">
-    <div style="display:flex;justify-content:center;align-items:center;">
-  
-     
+
+        <div class="row">
+            <div class="col-lg-12" id="title">
+            <div style="display:flex;justify-content:center;align-items:center;">
         <table cellpadding="15" class="table-bordered maintable table-responsive">
 
 	      
@@ -112,33 +105,23 @@ $con = null;
 
             $i = 0;
             $total = 0;
-            if(empty($rows)) {
-                echo "<tr><td>No movies to display.</td></tr>";
-            } else {
-
-
-
-
             while ($i < count($rows)) {
-                echo movielooptable($rows[$i]['link'], $rows[$i]['title'], $rows[$i]['line'], $rows[$i]['movieid'], $rows[$i]['release_date']);
+                echo pendingbetstable($rows[$i]['link'], $rows[$i]['title'], $rows[$i]['line'], $rows[$i]['movieid'], $rows[$i]['release_date'], $rows[$i]['critic_score']);
                 
                 $i++;
-
-                }
 
             }
 
 
              ?>
         </table>
-             
         </div>
         </div>
 
-          </div><!-- /.container-fluid -->
+        </div><!-- /.row -->
 
 
-
+     </div> <!-- /.container-fluid -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>

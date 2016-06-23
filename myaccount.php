@@ -94,6 +94,7 @@ while ($i < count($betrows)) {
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/mymain.css">
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <script src="js/myscript.js"></script>
     </head>
@@ -124,6 +125,8 @@ while ($i < count($betrows)) {
         <li class="active"><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
         <li><a href="mybets.php">My Current Bets</a></li>
         <li><a href="pendingbets.php">Pending Bets</a></li>
+        <li ><a href="archivebets.php">Archived Bets</a></li>
+        <li><a href="leaderboards.php">Leaderboards</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
@@ -140,7 +143,8 @@ while ($i < count($betrows)) {
 
    <div class="row">
         
-                 <div class="col-md-12">        
+       <div class="col-md-12">
+     <div style="display:flex;justify-content:center;align-items:center;">
         <table cellpadding="15" class="table-responsive table-bordered  accounttable">
 
 	
@@ -163,6 +167,10 @@ while ($i < count($betrows)) {
 </tr>
              
         </table>
+        </div> <!-- end row -->
+
+        <div class="row">
+
         <div class="col-md-3">
         <span></span>
         </div>
@@ -179,7 +187,12 @@ while ($i < count($betrows)) {
         <span></span>
         </div>
         </div>
+
+        
         </div>
+        </div>
+
+        </div>  <!-- end container -->
 
 
 

@@ -1,6 +1,6 @@
 <?php
 require_once('resources/constants.inc.php');
-include('functions/movietables.php');
+include('betstable.php');
 session_start();
 //make sure that user is logged in for this page
         if(!(isset($_SESSION['userid']))) {
@@ -9,19 +9,19 @@ session_start();
             $userid = $_SESSION['userid'];
             echo $userid;
         }
+    $err = "";
 
 try 
     {
     $con = new PDO("mysql:host=".CONST_HOST.";dbname=".CONST_DBNAME,CONST_USER,CONST_PASSWORD);
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "select * from movies where active = 1;";
+    $sql = "SELECT * FROM `users` order by balance desc limit 5";
     $totalresults = $con->prepare($sql);
     $myarray = $totalresults->execute();
     $rows = $totalresults->fetchAll();
-    if(!empty($rows)) {
-    $link = "\"". $rows[0][4] ."\"";
-    }
-} 
+
+
+    } 
 catch (Exception $e) 
     {
     $error = $e->getMessage();
@@ -29,6 +29,13 @@ catch (Exception $e)
     }
 
 $con = null;
+
+
+if(empty($rows)) {
+    $err = "No account information present.";
+}
+
+
 
 ?>
 
@@ -47,12 +54,13 @@ $con = null;
         <!-- Bootstrap -->
     	<link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="css/animate.css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/mymain.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="css/material-charts.css">
+        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
         <script src="js/myscript.js"></script>
     </head>
     <body>
@@ -62,7 +70,7 @@ $con = null;
 
 
         <!-- Add your site or application content here -->
-        <div class="container-fluid">
+        <div class="container-fluid" >
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -73,7 +81,7 @@ $con = null;
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand active" href="homepage.php">Movie Bets</a>
+      <a class="navbar-brand" href="homepage.php">Movie Bets</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -83,67 +91,81 @@ $con = null;
         <li><a href="mybets.php">My Current Bets</a></li>
         <li><a href="pendingbets.php">Pending Bets</a></li>
         <li ><a href="archivebets.php">Archived Bets</a></li>
-        <li><a href="leaderboards.php">Leaderboards</a></li>
+        <li class="active"><a href="leaderboards.php">Leaderboards</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php">Sign Out</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-
+  </div><!-- /.container-fluid -->
 </nav>
-
-
-
         	<div class="row">
 	      	  <div class="col-lg-12" id="title">
-		      	  <h1>Pick your movies</h1>
-		      	  <h2>Take ya bets</h2>
+		      	  <h1>Current Top 5</h1>
 	      	  </div>
 	      	 </div>
-    <div class="col-lg-12" id="title">
-    <div style="display:flex;justify-content:center;align-items:center;">
-  
-     
-        <table cellpadding="15" class="table-bordered maintable table-responsive">
 
-	      
-             <?php
+            <div class="row">
+              <div class="col-lg-12">
+                  <p>
 
-            $i = 0;
-            $total = 0;
-            if(empty($rows)) {
-                echo "<tr><td>No movies to display.</td></tr>";
-            } else {
+                  </p>
 
+              </div>
 
-
-
-            while ($i < count($rows)) {
-                echo movielooptable($rows[$i]['link'], $rows[$i]['title'], $rows[$i]['line'], $rows[$i]['movieid'], $rows[$i]['release_date']);
-                
-                $i++;
-
-                }
-
-            }
-
-
-             ?>
-        </table>
-             
-        </div>
-        </div>
-
-          </div><!-- /.container-fluid -->
+              <div class="row">
+                <div class="col-lg-12">
+                <center>
+                     <div id="bar-chart"></div>
+                </center>
+                </div>
+              </div>
+             </div>
 
 
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/material-charts.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <script type="text/javascript">
+            
+            $(document).ready(function() {
+            //execute code
+            var jsonArray =   <?php  echo json_encode($rows); ?>;
+            var values = [];
+            var names = [];
+
+            for(var i = 0; i < jsonArray.length; i++) {
+                var obj = jsonArray[i];
+                values.push(obj.balance);
+                names.push(obj.firstname);
+            }
+
+            console.log(values);
+            console.log(names);
+
+
+                var exampleBarChartData = {
+                    "datasets": {
+                        "values": values,
+                        "labels": names,
+                        "color": "blue"
+                    },
+                    "title": "Example Bar Chart",
+                    "noY": true,
+                    "height": "300px",
+                    "width": "500px",
+                    "background": "#FFFFFF",
+                    "shadowDepth": "1"
+                };
+
+                MaterialCharts.bar("#bar-chart", exampleBarChartData)
+            });
+        </script>
 
         <!-- Include all compiled plugins (below), or include individual files as needed -->
   	  <script src="js/bootstrap.min.js"></script>

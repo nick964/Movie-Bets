@@ -4,7 +4,7 @@ include('../functions/functions.php');
 
 
 //NOTES: Change this variable if you want to change how long after the release until the score is updated.
-$TIMEGAP = 2;
+$TIMEGAP = 7;
 
 
 session_start();

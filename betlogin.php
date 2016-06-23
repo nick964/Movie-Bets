@@ -60,41 +60,61 @@ include('login.php'); //includes login script
 		</div>        
 
 
-			<div class="col-md-6">        
-
-
-	<div id="home_page">
-
-		
-		
-
-
-		<form id="form1" class="form"  method="POST" action="login.php">
-					<div class="form_description">
-					<p id="user_error"><span></span></p>
-					</div>	
+		<div class="col-md-6">        
+		<form id="form1" class="form form-group"  method="POST" action="login.php">
+					
+			<div class="form_description">
+			<p id="user_error"><span></span></p>
+			</div>	
 		
 							
-			<table id="table_home" align="center">
-			<tr id="tr_1" >
-			<input type="text" name="username" id="username" placeholder="Username" value="" size="20" maxlength="20">
-			</tr>
-			<br>	
-			<tr id="tr_1" >
-			<input type="password" name="password" id="password" placeholder="Password" value="" size="20" maxlength="20">
-			</tr>
+			<fieldset class="form-group">
+			<input type="text" class="form-control" name="username" id="username" placeholder="Username" value="" size="20" maxlength="20">
+			</fieldset>
+
+			<fieldset class="form-group">
+			<input type="password" class="form-control"  name="password" id="password" placeholder="Password" value="" size="20" maxlength="20">
+			</fieldset>
+
 			<br>
-			<tr id="tr_1">
-			<input type="submit" name="submit" id="home_submit" value="Login">	
-			</tr>
-			</table>
+	
+	 	 <div style="display:flex;justify-content:center;align-items:center;">		
+			<input type="submit" name="submit" class="btn btn-primary" value="Login">	
 		<br>
+		</div>
 		
-		</form></div>
+		</form>
 
-		<button id="signupBtn"><a id="signupBtn" href="signup.php">Sign Up</a></button>
+		</div>
+		
+		
 
-</div>	
+		<div class="col-md-3">
+		<span></span>
+		</div>        
+
+
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-3">
+		<span></span>
+		</div>     
+
+		<div class="col-md-6">   
+			 <center>
+			
+				<button id="signupBtn" class="btn btn-primary"><a id="signupBtn" href="signup.php" style="color: white">Sign Up</a></button>
+
+			</center>
+		</div>
+
+
+		<div class="col-md-3">
+		<span></span>
+		</div>     
+	</div>	
 	
 	</div>	
 </div>

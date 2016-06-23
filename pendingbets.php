@@ -45,7 +45,7 @@ $con = null;
         <!-- Bootstrap -->
     	<link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
-
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/mymain.css">
@@ -59,7 +59,7 @@ $con = null;
 
 
         <!-- Add your site or application content here -->
-        <div class="container-fluid">
+
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -79,13 +79,15 @@ $con = null;
         <li><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
         <li><a href="mybets.php">My Current Bets</a></li>
         <li class="active"><a href="pendingbets.php">Pending Bets</a></li>
+        <li ><a href="archivebets.php">Archived Bets</a></li>
+        <li><a href="leaderboards.php">Leaderboards</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php">Sign Out</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+
 </nav>
         	<div class="row">
 	      	  <div class="col-lg-12" id="title">
@@ -93,6 +95,9 @@ $con = null;
 	      	  </div>
 	      	 </div>
 
+        <div class="row">
+            <div class="col-lg-12" id="title">
+            <div style="display:flex;justify-content:center;align-items:center;">
         <table cellpadding="15" class="table-bordered maintable table-responsive">
 
 	      
@@ -110,9 +115,13 @@ $con = null;
 
              ?>
         </table>
+        </div>
+        </div>
+
+        </div><!-- /.row -->
 
 
-
+     </div> <!-- /.container-fluid -->
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>

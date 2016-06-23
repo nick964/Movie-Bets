@@ -52,7 +52,7 @@ $con = null;
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
@@ -93,21 +93,25 @@ $con = null;
         <li><a href="myaccount.php">My Account<span class="sr-only">(current)</span></a></li>
         <li class="active"><a href="mybets.php">My Current Bets</a></li>
         <li><a href="pendingbets.php">Pending Bets</a></li>
+        <li ><a href="archivebets.php">Archived Bets</a></li>
+        <li><a href="leaderboards.php">Leaderboards</a></li>
       </ul>
      
       <ul class="nav navbar-nav navbar-right">
         <li><a href="logout.php">Sign Out</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+
 </nav>
         	<div class="row">
 	      	  <div class="col-lg-12" id="title">
 		      	  <h1>Your Current Bets</h1>
 	      	  </div>
 	      	 </div>
-
-        <table cellpadding="15" class="table-bordered maintable table-responsive">
+        <div class="row">
+         <div class="col-lg-12">
+             <div style="display:flex;justify-content:center;align-items:center;">
+              <table cellpadding="15" class="table-bordered maintable table-responsive">
 
 	      
              <?php
@@ -125,9 +129,12 @@ $con = null;
 
 
              ?>
-        </table>
+               </table>
+             </div>
+          </div> 
+        </div> <!-- /.row -->
 
-
+    </div>    <!-- /.container-fluid -->
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

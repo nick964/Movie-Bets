@@ -1,5 +1,5 @@
 <?php
-define("CONST_USER","nickzcha");
+define("CONST_USER","nickzcha_movies");
 define("CONST_PASSWORD","robinson55");
 define("CONST_DBNAME","nickzcha_movies");
 define("CONST_HOST","localhost");
